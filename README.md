@@ -41,6 +41,14 @@ Observatory OPS
         |
         +-- Governance Integration
 
+## Architecture
+
+![Observatory OPS Architecture](docs/architecture/observatory-ops-architecture.png)
+
+## Dashboard Preview
+
+![Observatory OPS Dashboard](docs/screenshots/observatory-ops-dashboard.png)
+
 Related Projects:
 - ICARUS: Canonical Event Model
 - BPM: Process Governance
