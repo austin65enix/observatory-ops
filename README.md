@@ -1,4 +1,4 @@
-# Observatory OPS   #Austin Hsieh | Seat No. 18
+# Observatory OPS     #Austin Hsieh | Seat No. 18
 
 ## Enterprise Observability Platform
 
