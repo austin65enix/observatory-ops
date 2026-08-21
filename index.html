@@ -1,1 +1,768 @@
 
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Observatory OPS | Enterprise Observability Platform</title>
+
+  <meta
+    name="description"
+    content="Observatory OPS is an Enterprise Observability Platform for operational signals, event correlation, evidence preservation, and governance integration."
+  >
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2a;
+      --card: #102235;
+      --card-light: #142b42;
+
+      --text: #edf6ff;
+      --muted: #9db0c3;
+
+      --blue: #4c9aff;
+      --cyan: #50d5ff;
+      --green: #4fd1a1;
+      --border: rgba(255,255,255,0.10);
+
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(circle at top right, rgba(76,154,255,0.16), transparent 30%),
+        var(--bg);
+
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(7,17,31,0.92);
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: auto;
+      padding: 14px 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.92rem;
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: auto;
+      padding: 110px 24px 90px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--cyan);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+
+      border: 1px solid rgba(80,213,255,0.30);
+      border-radius: 999px;
+      padding: 6px 12px;
+
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-subtitle {
+      margin-top: 20px;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .hero-text {
+      margin-top: 24px;
+      max-width: 800px;
+      font-size: 1.12rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+
+      border-radius: 10px;
+      border: 1px solid var(--border);
+
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(135deg, #3178ff, #34b6e8);
+    }
+
+    .button-secondary {
+      color: white;
+      background: var(--card);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    section {
+      max-width: var(--max-width);
+      margin: auto;
+      padding: 80px 24px;
+    }
+
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      color: var(--cyan);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h2 {
+      margin: 8px 0 20px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .grid {
+      margin-top: 36px;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-4 {
+      margin-top: 36px;
+
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(20,43,66,0.96),
+          rgba(13,27,42,0.96)
+        );
+
+      border: 1px solid var(--border);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .architecture-image,
+    .dashboard-image {
+      width: 100%;
+      display: block;
+
+      margin-top: 36px;
+
+      border-radius: 18px;
+      border: 1px solid var(--border);
+
+      box-shadow: 0 20px 55px rgba(0,0,0,0.35);
+    }
+
+    .note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .tech-list {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tech {
+      padding: 9px 14px;
+
+      border-radius: 999px;
+      border: 1px solid rgba(76,154,255,0.35);
+
+      background: rgba(76,154,255,0.08);
+      color: #cfe7ff;
+
+      font-size: 0.93rem;
+    }
+
+    .flow {
+      margin-top: 36px;
+      padding: 30px;
+
+      border-radius: 18px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+
+      overflow-x: auto;
+
+      color: #bfe7ff;
+      font-family: Consolas, monospace;
+      white-space: pre;
+      line-height: 1.9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 34px;
+
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 15px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--card-light);
+    }
+
+    td {
+      color: var(--muted);
+      background: rgba(16,34,53,0.62);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 50px 24px;
+
+      text-align: center;
+
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 850px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .grid,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+
+      <div class="brand">
+        Observatory OPS
+      </div>
+
+      <div class="nav-links">
+        <a href="#purpose">Purpose</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#technology">Technology</a>
+        <a href="#evolution">Evolution</a>
+        <a href="#projects">Projects</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Hero -->
+  <header class="hero">
+
+    <div class="eyebrow">
+      Enterprise Observability Platform
+    </div>
+
+    <h1>
+      Observatory OPS
+    </h1>
+
+    <div class="hero-subtitle">
+      From Monitoring to Operational Intelligence and Governance
+    </div>
+
+    <p class="hero-text">
+
+      Observatory OPS is an engineering platform for collecting
+      operational signals, correlating events, preserving evidence,
+      and integrating operational visibility with governance workflows.
+
+      <br><br>
+
+      天文台 OPS 的目標，是將監控、事件、證據與治理整合到一致的
+      Operational Intelligence 架構中。
+
+    </p>
+
+    <div class="hero-actions">
+
+      <a
+        class="button button-primary"
+        href="#architecture"
+      >
+        View Architecture
+      </a>
+
+      <a
+        class="button button-secondary"
+        href="https://github.com/austin65enix/observatory-ops"
+        target="_blank"
+      >
+        GitHub Repository
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- Purpose -->
+  <section id="purpose">
+
+    <div class="section-label">
+      Project Purpose
+    </div>
+
+    <h2>
+      Operational visibility beyond traditional monitoring
+    </h2>
+
+    <p class="lead">
+
+      Observatory OPS extends traditional monitoring into a broader
+      operational engineering model. Instead of only showing alerts
+      and metrics, the platform is designed to preserve event context,
+      operational evidence, and governance relationships.
+
+    </p>
+
+
+    <div class="grid-4">
+
+      <div class="card">
+        <h3>Telemetry</h3>
+        <p>
+          Collect operational signals and infrastructure metrics.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Event Correlation</h3>
+        <p>
+          Connect events with operational and system context.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Evidence</h3>
+        <p>
+          Preserve evidence for traceability, investigation, and review.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Governance</h3>
+        <p>
+          Connect observability with process and execution governance.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Architecture -->
+  <section id="architecture">
+
+    <div class="section-label">
+      Architecture
+    </div>
+
+    <h2>
+      Observatory OPS Architecture
+    </h2>
+
+    <p class="lead">
+
+      Observatory OPS acts as an operational visibility layer connecting
+      telemetry, canonical event modeling, evidence preservation,
+      and governance systems.
+
+    </p>
+
+    <img
+      class="architecture-image"
+      src="docs/architecture/observatory-ops-architecture.png"
+      alt="Observatory OPS Architecture"
+    >
+
+  </section>
+
+
+  <!-- Dashboard -->
+  <section id="dashboard">
+
+    <div class="section-label">
+      Interface Concept
+    </div>
+
+    <h2>
+      Operational Dashboard Preview
+    </h2>
+
+    <p class="lead">
+
+      The dashboard concept presents signal health, alerts,
+      operational events, evidence items, and governance status
+      through one consolidated operational view.
+
+    </p>
+
+    <img
+      class="dashboard-image"
+      src="docs/screenshots/observatory-ops-dashboard.png"
+      alt="Observatory OPS Dashboard Concept"
+    >
+
+    <p class="note">
+      * Dashboard image is a conceptual UI preview used to illustrate
+      the intended Observatory OPS operational experience.
+    </p>
+
+  </section>
+
+
+  <!-- Technology -->
+  <section id="technology">
+
+    <div class="section-label">
+      Technologies
+    </div>
+
+    <h2>
+      Engineering Technology Direction
+    </h2>
+
+    <p class="lead">
+
+      Observatory OPS combines observability technologies with
+      event modeling, evidence preservation, security operations,
+      and execution governance.
+
+    </p>
+
+    <div class="tech-list">
+
+      <span class="tech">OpenTelemetry / OTel</span>
+      <span class="tech">Prometheus</span>
+      <span class="tech">Wazuh</span>
+      <span class="tech">Zeek</span>
+      <span class="tech">SIEM</span>
+      <span class="tech">ICARUS</span>
+      <span class="tech">BPM / Flowable</span>
+      <span class="tech">Kubernetes</span>
+      <span class="tech">PostgreSQL</span>
+      <span class="tech">Evidence Engineering</span>
+      <span class="tech">Process Governance</span>
+      <span class="tech">Execution Governance</span>
+
+    </div>
+
+  </section>
+
+
+  <!-- Evolution -->
+  <section id="evolution">
+
+    <div class="section-label">
+      Project Evolution
+    </div>
+
+    <h2>
+      From SOC Monitoring to Governance
+    </h2>
+
+    <p class="lead">
+
+      Observatory OPS evolved from earlier security monitoring and
+      portal engineering work into a broader operational intelligence
+      and governance architecture.
+
+    </p>
+
+    <div class="flow">Wazuh / Zeek Monitoring
+          |
+          v
+   SOC Monitoring
+          |
+          v
+    ENYRAX Portal
+          |
+          v
+   Observatory OPS
+          |
+          v
+Event + Evidence + Governance
+          |
+          v
+Process-to-Execution Governance</div>
+
+  </section>
+
+
+  <!-- Related Projects -->
+  <section id="projects">
+
+    <div class="section-label">
+      Engineering Ecosystem
+    </div>
+
+    <h2>
+      Related Projects
+    </h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>Observatory OPS</strong></td>
+          <td>
+            Operational visibility and intelligence layer
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>ICARUS</strong></td>
+          <td>
+            Canonical event model and event continuity
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>BPM</strong></td>
+          <td>
+            Process governance and authorization workflows
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>K8SSR</strong></td>
+          <td>
+            Execution governance and runtime control
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>ENYRAX Portal</strong></td>
+          <td>
+            User-facing operational platform
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>SOC Monitoring SIEM Lab</strong></td>
+          <td>
+            Security monitoring and SIEM foundation
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+
+  <!-- Current Status -->
+  <section>
+
+    <div class="section-label">
+      Project Status
+    </div>
+
+    <h2>
+      Active Development
+    </h2>
+
+    <p class="lead">
+
+      Observatory OPS is an evolving architecture and engineering
+      portfolio project. Current work focuses on operational signal
+      modeling, event correlation, evidence preservation,
+      governance integration, and platform documentation.
+
+    </p>
+
+    <p class="status">
+      <span class="status-dot"></span>
+      Active Engineering Project
+    </p>
+
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <strong>Observatory OPS</strong>
+
+    <br>
+
+    Enterprise Observability Platform
+
+    <br><br>
+
+    Repository:
+    <a
+      href="https://github.com/austin65enix/observatory-ops"
+      target="_blank"
+    >
+      github.com/austin65enix/observatory-ops
+    </a>
+
+    <br><br>
+
+    © 2026 Austin Hsieh
+
+  </footer>
+
+</body>
+</html>
